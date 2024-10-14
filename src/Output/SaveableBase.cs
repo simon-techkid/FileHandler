@@ -1,7 +1,7 @@
 ﻿// FileHandler by Simon Field
 
 using Disposal;
-using Hashing.Provisioning;
+using Hashing.Provisioning.Providers;
 using Logging;
 using Logging.Broadcasting;
 using System;
@@ -62,7 +62,7 @@ public abstract class SaveableBase<TRecord, TDocument, THashed> : DisposableBase
     /// <summary>
     /// The <see cref="IHashProvider{T}"/> for generating a hash of the document of type <typeparamref name="THashed"/>
     /// </summary>
-    protected abstract IHashProvider<THashed> HashProvider { get; }
+    protected abstract IHashingProvider<THashed> HashProvider { get; }
 
     /// <summary>
     /// Clears the contents of the <see cref="Document"/> in preparation for disposal.

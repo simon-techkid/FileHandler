@@ -1,7 +1,7 @@
 ﻿// FileHandler by Simon Field
 
-using Hashing.Provisioning;
-using Hashing.Provisioning.Json;
+using Hashing.Provisioning.Providers;
+using Hashing.Provisioning.Providers.Json;
 using Logging.Broadcasting;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ public abstract class JsonSaveable<TRecord>(Func<TRecord> doc, string? trackName
     /// </summary>
     protected abstract JsonSerializerOptions JsonOptions { get; }
 
-    protected override IHashProvider<List<JsonDocument>> HashProvider => new JsonHashProvider(OutputEncoding);
+    protected override IHashingProvider<List<JsonDocument>> HashProvider => new JsonHashProvider(OutputEncoding);
 
     protected override byte[] ConvertToBytes()
     {

@@ -1,7 +1,7 @@
 ﻿// FileHandler by Simon Field
 
-using Hashing.Provisioning;
-using Hashing.Provisioning.Txt;
+using Hashing.Provisioning.Providers;
+using Hashing.Provisioning.Providers.Txt;
 using Logging.Broadcasting;
 using System;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace FileHandler.Output.Txt;
 public abstract class TxtSaveable<TRecord>(Func<TRecord> doc, string? trackName, IBroadcaster<string> bcast) :
     SaveableAndTransformableBase<TRecord, string?[], string?[]>(doc, bcast, trackName)
 {
-    protected override IHashProvider<string?[]> HashProvider => new TxtHashProvider(OutputEncoding);
+    protected override IHashingProvider<string?[]> HashProvider => new TxtHashProvider(OutputEncoding);
 
     /// <summary>
     /// Default line ending for the TXT document.
