@@ -1,6 +1,5 @@
 ﻿// FileHandler by Simon Field
 
-using Logging;
 using System;
 
 namespace FileHandler.Output;
@@ -8,7 +7,7 @@ namespace FileHandler.Output;
 /// <summary>
 /// Interfaces with file output classes, unifying all formats that pairs can be written out as.
 /// </summary>
-public interface IFileOutput : IDisposable, ILogger<string>
+public interface IFileOutput : IDisposable
 {
     /// <summary>
     /// The name of this document's format, used in exported files' extensions.

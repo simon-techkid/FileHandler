@@ -1,29 +1,24 @@
 ﻿// FileHandler by Simon Field
 
-using Hashing.Provisioning.Providers;
-using Hashing.Provisioning.Providers.Json;
-using Logging.Broadcasting;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml.Linq;
 
-namespace FileHandler.Output.Json;
+namespace FileHandler.Output.Formats.Json;
 
 /// <summary>
 /// Provides instructions for serializing and transforming JSON data using System.Text.Json.
 /// </summary>
-public abstract class JsonSaveable<TRecord>(Func<TRecord> doc, string? trackName, IBroadcaster<string> bcast) :
-    SaveableAndTransformableBase<TRecord, List<JsonDocument>, List<JsonDocument>>(doc, bcast, trackName)
+public abstract class JsonSaveable<TRecord>(Func<TRecord> doc, string? trackName) :
+    SaveableAndTransformableBase<TRecord, List<JsonDocument>, List<JsonDocument>>(doc, trackName)
 {
 
     /// <summary>
     /// The <see cref="JsonSerializerOptions"/> for the exported contents of this JSON document.
     /// </summary>
     protected abstract JsonSerializerOptions JsonOptions { get; }
-
-    protected override IHashingProvider<List<JsonDocument>> HashProvider => new JsonHashProvider(OutputEncoding);
 
     protected override byte[] ConvertToBytes()
     {

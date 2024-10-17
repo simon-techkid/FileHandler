@@ -1,18 +1,15 @@
 ﻿// SpotifyGPX by Simon Field
 
-using Disposal;
-using Logging;
-using Logging.Broadcasting;
+using System;
 using System.IO;
 
 namespace FileHandler.Input;
 
-public abstract class FileInputBase : DisposableBase
+public abstract class FileInputBase : IDisposable
 {
-    protected FileInputBase(string path, IBroadcaster<string> bcaster) : base(bcaster)
+    protected FileInputBase(string path)
     {
         FileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-        BCaster.Broadcast($"New file stream opened for reading '{path}'.", LogLevel.Debug);
         StreamReader = new StreamReader(FileStream);
     }
 
@@ -36,10 +33,11 @@ public abstract class FileInputBase : DisposableBase
     /// </summary>
     protected abstract void DisposeDocument();
 
-    protected override void DisposeClass()
+    public void Dispose()
     {
         StreamReader.Dispose();
         FileStream.Dispose();
         DisposeDocument();
+        GC.SuppressFinalize(this);
     }
 }

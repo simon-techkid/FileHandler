@@ -1,9 +1,5 @@
 ﻿// FileHandler by Simon Field
 
-using Disposal;
-using Hashing.Provisioning.Providers;
-using Logging;
-using Logging.Broadcasting;
 using System;
 using System.IO;
 
@@ -14,9 +10,9 @@ namespace FileHandler.Output;
 /// </summary>
 /// <typeparam name="TDocument">The source format type.</typeparam>
 /// <typeparam name="THashed">The format type of the hashable portion of this document.</typeparam>
-public abstract class SaveableBase<TRecord, TDocument, THashed> : DisposableBase, IFileOutput
+public abstract class SaveableBase<TRecord, TDocument, THashed> : IFileOutput
 {
-    protected SaveableBase(Func<TRecord> pairs, IBroadcaster<string> bcast, string? trackName = null) : base(bcast)
+    protected SaveableBase(Func<TRecord> pairs, string? trackName = null)
     {
         DataProvider = pairs;
         Document = GetDocument(trackName);
@@ -50,7 +46,6 @@ public abstract class SaveableBase<TRecord, TDocument, THashed> : DisposableBase
     {
         using FileStream fileStream = new(path, FileMode.Create, FileAccess.Write);
         fileStream.Write(bytes, 0, bytes.Length);
-        BCaster.Broadcast($"New file stream opened for writing {bytes.Length} bytes to {path}.", LogLevel.Debug);
     }
 
     /// <summary>
@@ -60,18 +55,14 @@ public abstract class SaveableBase<TRecord, TDocument, THashed> : DisposableBase
     protected abstract byte[] ConvertToBytes();
 
     /// <summary>
-    /// The <see cref="IHashProvider{T}"/> for generating a hash of the document of type <typeparamref name="THashed"/>
-    /// </summary>
-    protected abstract IHashingProvider<THashed> HashProvider { get; }
-
-    /// <summary>
     /// Clears the contents of the <see cref="Document"/> in preparation for disposal.
     /// </summary>
     /// <returns>A <typeparamref name="TDocument"/> that has been cleared.</returns>
     protected abstract TDocument ClearDocument();
 
-    protected override void DisposeClass()
+    public virtual void Dispose()
     {
         Document = ClearDocument();
+        GC.SuppressFinalize(this);
     }
 }

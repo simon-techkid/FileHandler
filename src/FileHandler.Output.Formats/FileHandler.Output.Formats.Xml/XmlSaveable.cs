@@ -1,23 +1,18 @@
 ﻿// FileHandler by Simon Field
 
-using Hashing.Provisioning.Providers;
-using Hashing.Provisioning.Providers.Xml;
-using Logging.Broadcasting;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace FileHandler.Output.Xml;
+namespace FileHandler.Output.Formats.Xml;
 
 /// <summary>
 /// Provides instructions for serializing and transforming XML data.
 /// </summary>
-public abstract class XmlSaveable<TRecord>(Func<TRecord> doc, string? trackName, IBroadcaster<string> bcast) :
-    SaveableAndTransformableBase<TRecord, XDocument, IEnumerable<XElement>>(doc, bcast, trackName)
+public abstract class XmlSaveable<TRecord>(Func<TRecord> doc, string? trackName) :
+    SaveableAndTransformableBase<TRecord, XDocument, IEnumerable<XElement>>(doc, trackName)
 {
-    protected override IHashingProvider<IEnumerable<XElement>> HashProvider => new XmlHashProvider(OutputEncoding);
-
     protected override Encoding OutputEncoding => XmlSettings.Encoding;
 
     /// <summary>

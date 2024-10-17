@@ -1,21 +1,17 @@
 ﻿// FileHandler by Simon Field
 
-using Hashing.Provisioning.Providers;
-using Hashing.Provisioning.Providers.Txt;
-using Logging.Broadcasting;
 using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace FileHandler.Output.Txt;
+namespace FileHandler.Output.Formats.Txt;
 
 /// <summary>
 /// Provides instructions for serializing and transforming TXT data.
 /// </summary>
-public abstract class TxtSaveable<TRecord>(Func<TRecord> doc, string? trackName, IBroadcaster<string> bcast) :
-    SaveableAndTransformableBase<TRecord, string?[], string?[]>(doc, bcast, trackName)
+public abstract class TxtSaveable<TRecord>(Func<TRecord> doc, string? trackName) :
+    SaveableAndTransformableBase<TRecord, string?[], string?[]>(doc, trackName)
 {
-    protected override IHashingProvider<string?[]> HashProvider => new TxtHashProvider(OutputEncoding);
 
     /// <summary>
     /// Default line ending for the TXT document.

@@ -1,6 +1,5 @@
 ﻿// FileHandler by Simon Field
 
-using Logging.Broadcasting;
 using System;
 using System.IO;
 using System.Text;
@@ -15,8 +14,8 @@ namespace FileHandler.Output;
 /// </summary>
 /// <typeparam name="TDocument">The source format type.</typeparam>
 /// <typeparam name="THashed">The format type of the hashable portion of this document.</typeparam>
-public abstract partial class SaveableAndTransformableBase<TRecord, TDocument, THashed>(Func<TRecord> doc, IBroadcaster<string> bcast, string? trackName = null) :
-    SaveableBase<TRecord, TDocument, THashed>(doc, bcast, trackName),
+public abstract partial class SaveableAndTransformableBase<TRecord, TDocument, THashed>(Func<TRecord> doc, string? trackName = null) :
+    SaveableBase<TRecord, TDocument, THashed>(doc, trackName),
     ITransformableOutput
 {
 
