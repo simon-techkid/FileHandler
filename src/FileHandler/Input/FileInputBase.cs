@@ -33,6 +33,8 @@ public abstract class FileInputBase : IDisposable
     /// </summary>
     protected abstract void DisposeDocument();
 
+    public bool Disposed { get; protected set; }
+
     public void Dispose()
     {
         StreamReader.Dispose();
