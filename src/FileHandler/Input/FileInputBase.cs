@@ -1,11 +1,12 @@
 ﻿// SpotifyGPX by Simon Field
 
+using Disposal;
 using System;
 using System.IO;
 
 namespace FileHandler.Input;
 
-public abstract class FileInputBase : IDisposable
+public abstract class FileInputBase : IDisposable, IDisposed
 {
     protected FileInputBase(string path)
     {
@@ -40,6 +41,7 @@ public abstract class FileInputBase : IDisposable
         StreamReader.Dispose();
         FileStream.Dispose();
         DisposeDocument();
+        Disposed = true;
         GC.SuppressFinalize(this);
     }
 }
