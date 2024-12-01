@@ -1,6 +1,6 @@
-﻿// FileHandler by Simon Field
+﻿// Techkid.FileHandler by Simon Field
 
-namespace FileHandler.Output;
+namespace Techkid.FileHandler.Output;
 
 public partial class SaveableAndTransformableBase<TRecord, TDocument, THashed>
 {

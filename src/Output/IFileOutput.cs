@@ -1,8 +1,8 @@
-﻿// FileHandler by Simon Field
+﻿// Techkid.FileHandler by Simon Field
 
 using System;
 
-namespace FileHandler.Output;
+namespace Techkid.FileHandler.Output;
 
 /// <summary>
 /// Interfaces with file output classes, unifying all formats that pairs can be written out as.

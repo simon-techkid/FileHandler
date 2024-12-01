@@ -1,4 +1,4 @@
-﻿// FileHandler by Simon Field
+﻿// Techkid.FileHandler by Simon Field
 
 using System;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
 
-namespace FileHandler.Output;
+namespace Techkid.FileHandler.Output;
 
 /// <summary>
 /// Provides instructions for serializing <typeparamref name="TDocument"/> data to <see langword="byte"/>[] and transforming and/or saving it in the target format.

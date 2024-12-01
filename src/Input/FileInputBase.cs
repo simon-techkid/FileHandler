@@ -1,12 +1,11 @@
-﻿// SpotifyGPX by Simon Field
+﻿// Techkid.FileHandler by Simon Field
 
-using Disposal;
 using System;
 using System.IO;
 
-namespace FileHandler.Input;
+namespace Techkid.FileHandler.Input;
 
-public abstract class FileInputBase : IDisposable, IDisposed
+public abstract class FileInputBase : IDisposable
 {
     protected FileInputBase(string path)
     {
@@ -34,7 +33,7 @@ public abstract class FileInputBase : IDisposable, IDisposed
     /// </summary>
     protected abstract void DisposeDocument();
 
-    public bool Disposed { get; protected set; }
+    protected bool Disposed { get; set; }
 
     public void Dispose()
     {

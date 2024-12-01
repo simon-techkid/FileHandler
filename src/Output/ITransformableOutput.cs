@@ -1,6 +1,6 @@
-﻿// FileHandler by Simon Field
+﻿// Techkid.FileHandler by Simon Field
 
-namespace FileHandler.Output;
+namespace Techkid.FileHandler.Output;
 
 /// <summary>
 /// Interfaces with formats sharing the ability to transform XML using an XSLT stylesheet.
